@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+</h:head>
+<h:body style="font-size: 12px;">
+    <ui:include src="menu.xhtml"/>
+    <br></br>
+    <h:form>
+        <p:panel header="User Services" style="font-size: 12px;">
+            <h3>Export Users</h3>
+            <h:commandLink>
+                <h:outputText name="Export to Excel" style="font-weight: bold; color: brown"/>
+                <p:dataExporter type="xls" target="users" fileName="users"/>
+            </h:commandLink>
+
+            <h:commandLink>
+                <h:outputText name="Export to PDF" style="font-weight: bold; color: brown"/>
+                <p:dataExporter type="pdf" target="users" fileName="users"/>
+            </h:commandLink>
+
+            <p:dataTable id="users"
+                         var="user"
+                         style="font-size: 12px;"
+                         value="#{userBean.users}"
+                         reflow="true"
+                         rows="25"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         filteredValue="#{productBean.filteredProducts}"
+                         rowsPerPageTemplate="25,100,500">
+
+                <p:column headerText="First Name" filterBy="#{user.firstName}" filterMatchMode="contains" sortBy="#{user.firstName}">
+                    <h:outputText value="#{user.firstName}" />
+                </p:column>
+
+                <p:column headerText="Last Name" filterBy="#{user.lastName}" filterMatchMode="contains" sortBy="#{user.lastName}">
+                    <h:outputText value="#{user.lastName}" />
+                </p:column>
+
+                <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains" sortBy="#{user.email}">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+
+                <p:column headerText="Phone" filterBy="#{user.phoneNumber}" filterMatchMode="contains" sortBy="#{user.phoneNumber}">
+                    <h:outputText value="#{user.phoneNumber}"/>
+                </p:column>
+
+                <p:column headerText="Address" filterBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" filterMatchMode="contains" sortBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}">
+                    <h:outputText value="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

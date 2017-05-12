@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Add Temple Service</title>
+
+    <style type="text/css">
+        body {
+            align-content: center;
+            align-items: center;
+            align-self: center;
+            text-align: center;
+        }
+    </style>
+</h:head>
+
+
+<h:body>
+    <center>
+    <h2 style="color: #ff3300">If you are an existing user please login here.</h2>
+    <h:form id="loginForm" style="width: 50%">
+        <p:panel id="panel" header="Sri Venkateswara Swamy Temple Of Colorado - Login">
+            <p:messages autoUpdate="true"/>
+            <h:panelGrid id="grid" columns="4" cellpadding="5">
+                <p:outputLabel value="Email" />
+                <p:inputText id="email" value="#{userBean.user.email}"></p:inputText>
+                <b>(Required)</b>
+                <p:message for="email"></p:message>
+
+                <p:outputLabel value="Password" />
+                <p:password id="password" value="#{userBean.user.password}"></p:password>
+                <b>(Required)</b>
+                <p:message for="password"></p:message>
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:commandButton value="Login" actionListener="#{userBean.login}"/>
+                <p:commandButton value="Register Now" actionListener="#{userBean.goToUserProfilePage}" />
+                <p:commandButton value="Send My Password" actionListener="#{userBean.sendPassword}" />
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+    </center>
+</h:body>
+</html>

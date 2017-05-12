@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+archivesBaseName = 'onlineRegistration'
+version = '1' 
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+        compile files('/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/hibernate-core-5.2.8.Final.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/hibernate-commons-annotations-5.0.1.Final.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/commons-logging-1.2.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/commons-lang-2.6.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/humanity-1.0.10.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/hibernate-validator-5.2.4.Final.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/poi-3.15.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/poi-ooxml-3.15.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/poi-ooxml-schemas-3.15.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/poi-excelant-3.15.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/xmlbeans-2.6.0.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/commons-collections4-4.1.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/com.lowagie.text-2.1.7.3.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/mssql-jdbc-6.1.4.jre8-preview.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/mysql-connector-java-5.1.22.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/jsf-api-2.2.14.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/javaee-api-7.0.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/bootstrap-1.0.10.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/commons-codec-1.10.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/cupertino-1.0.10.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/javax.mail-1.5.6.jar'
+                , '/Users/admin/development/modules/svtco/onlineRegistration/src/main/lib/primefaces-6.0.jar')
+
+}

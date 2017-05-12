@@ -1,0 +1,22 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <center>
+        <h1 style="color: #800000">SRI VENKATESWARA SWAMY TEMPLE OF COLORADO</h1>
+        <p:panelGrid columns="12" style="margin-top:20px; font-size: 12px; border: none;">
+            <p:commandButton styleClass="altColor" value="All Users" actionListener="#{userBean.goToAllUsersPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
+            <p:commandButton styleClass="altColor" value="All Temple Services" actionListener="#{userBean.goToAllServicesPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
+            <p:commandButton styleClass="altColor" value="All Devotees and Services" actionListener="#{userBean.goToAllDevoteeServicesPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
+            <p:commandButton styleClass="altColor" value="Add New Temple Service" actionListener="#{userBean.goToAddNewServicePage}" rendered="#{userBean.loggedInUser != null and userBean.loggedInUser.isAdmin == 'Y'}" />
+            <p:commandButton styleClass="altColor" value="Purchase Temple Services" actionListener="#{userBean.goToPurchaseServicesPage}" rendered="#{userBean.loggedInUser != null}" />
+            <p:commandButton styleClass="altColor" value="My Account" actionListener="#{userBean.goToUserProfilePage}" rendered="#{userBean.loggedInUser != null}" />
+            <p:commandButton styleClass="altColor" value="My Services" actionListener="#{userBean.goToMyServicePage}" rendered="#{userBean.loggedInUser != null}" />
+            <p:commandButton styleClass="altColor" value="Logout" actionListener="#{userBean.logout}" rendered="#{userBean.loggedInUser != null}" />
+        </p:panelGrid>
+    </center>
+    <br></br>
+</ui:composition>

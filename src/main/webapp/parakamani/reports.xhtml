@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+</h:head>
+
+<h:body style="font-size: 12px;">
+    <br></br>
+    <h:form style="font-size: 12px;">
+        <div class="ui-fluid">
+            <p:panel header="Donars - Report">
+                <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank">
+                    <p:dataTable id="donors"
+                                 var="donor"
+                                 style="margin-bottom:0; font-size: 12px;"
+                                 value="#{parakamaniBean.donors}"
+                                 rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 filteredValue="#{parakamaniBean.filteredDonors}"
+                                 rowsPerPageTemplate="25,100,500">
+
+                        <f:facet name="{Exporters}">
+                            <h:commandLink>
+                                <p:graphicImage name="../images/excel.png" width="24"/>
+                                <p:dataExporter type="xls" target="tbl" fileName="donors" />
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <p:graphicImage name="/images/pdf.png" width="24"/>
+                                <p:dataExporter type="pdf" target="tbl" fileName="donors"/>
+                            </h:commandLink>
+                        </f:facet>
+
+                        <p:column headerText="Name" filterBy="#{donor.firstName}" filterMatchMode="contains" sortBy="#{donor.firstName}">
+                            <h:outputText value="#{donor.firstName}" />
+                        </p:column>
+
+                        <p:column headerText="Email" filterBy="#{donor.email}" filterMatchMode="contains" sortBy="#{donor.email}">
+                            <h:outputText value="#{donor.email}" />
+                        </p:column>
+
+                        <p:column headerText="LastName" filterBy="#{donor.lastName}" filterMatchMode="contains" sortBy="#{donor.lastName}">
+                            <h:outputText value="#{donor.lastName}" />
+                        </p:column>
+
+                        <p:column headerText="Phone" filterBy="#{donor.phone}" filterMatchMode="contains" sortBy="#{donor.phone}">
+                            <h:outputText value="#{donor.phone}"/>
+                        </p:column>
+
+                        <p:column headerText="PledgeAmount" filterBy="#{donor.pledgeAmount}" filterMatchMode="contains" sortBy="#{donor.pledgeAmount}">
+                            <h:outputText value="#{donor.pledgeAmount}">
+                                <f:convertNumber type="currency" />
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panelGrid>
+
+            </p:panel>
+        </div>
+    </h:form>
+</h:body>
+</html>

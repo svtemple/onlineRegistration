@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Sri Venkateswara Swamy Temple Of Colorado-Add Temple Service</title>
+</h:head>
+
+<h:body style="font-size: 12px;">
+	<ui:include src="menu.xhtml"/>
+	<br></br>
+	<center>
+	<h:form id="productForm" style="font-size: 12px; width: 50%">
+		<p:panel id="panel" header="Add A New Temple Service" style="font-size: 12px;">
+			<p:messages autoUpdate="true"/>
+			<h:panelGrid id="grid" columns="3" cellpadding="5" style="font-size: 12px;">
+
+				<p:outputLabel value="Name (Required)" style="font-weight:bold"/>
+				<p:inputText id="name" placeholder="Service Name" value="#{productBean.product.name}" label="Name"/>
+				<p:message for="name" />
+
+				<p:outputLabel value="Location (Required)" style="font-weight:bold"/>
+				<p:selectOneRadio id="location" value="#{productBean.product.location}" label="Location">
+					<f:selectItem itemLabel="Home" itemValue="Home" />
+					<f:selectItem itemLabel="Temple" itemValue="Temple" />
+				</p:selectOneRadio>
+				<p:message for="location" />
+
+				<p:outputLabel value="Category (Required)" style="font-weight:bold"/>
+				<p:selectOneRadio id="category" value="#{productBean.product.category}" label="Category">
+					<f:selectItem itemLabel="Scheduled" itemValue="Scheduled" />
+					<f:selectItem itemLabel="Special" itemValue="Special" />
+					<f:selectItem itemLabel="Personal" itemValue="Personal" />
+				</p:selectOneRadio>
+				<p:message for="category" />
+
+				<p:outputLabel value="Schedule (Required)" style="font-weight:bold"/>
+				<p:selectOneRadio id="schedule" value="#{productBean.product.schedule}" label="Schedule">
+					<f:selectItem itemLabel="Daily" itemValue="Daily" />
+					<f:selectItem itemLabel="Weekly" itemValue="Weekly" />
+					<f:selectItem itemLabel="Monthly" itemValue="Monthly" />
+					<f:selectItem itemLabel="Yearly" itemValue="Yearly" />
+					<f:selectItem itemLabel="AnyTime" itemValue="AnyTime" />
+				</p:selectOneRadio>
+				<p:message for="schedule" />
+
+				<p:outputLabel value="Date" style="font-weight:bold"/>
+				<p:calendar id="dateOfService" value="#{productBean.product.dateOfService}" pattern="MM/dd/yyyy"/>
+				<p:message for="dateOfService" />
+
+				<p:outputLabel value="Time (Required)" style="font-weight:bold"/>
+				<p:calendar id="timeOfService" value="#{productBean.product.timeOfService}" pattern="HH:mm" timeOnly="true" size="5"/>
+				<p:message for="timeOfService" />
+
+				<p:outputLabel value="Description" style="font-weight:bold"/>
+				<p:inputTextarea id="description" maxlength="500" cols="40" rows="10" placeholder="Service Description" value="#{productBean.product.description}" label="Description"/>
+				<p:message for="description" />
+
+				<p:outputLabel value="Price (Required)" style="font-weight:bold"/>
+				<p:inputText id="price" placeholder="Price" value="#{productBean.product.price}" label="Price"/>
+				<p:message for="price"/>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" cellpadding="5" style="font-size: 12px;">
+				<p:commandButton value="Save" actionListener="#{productBean.addProduct}"/>
+				<p:commandButton value="Cancel" actionListener="#{productBean.cancel}"/>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	</center>
+</h:body>
+</html>

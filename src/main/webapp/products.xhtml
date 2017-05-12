@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+    </h:head>
+
+    <h:body style="font-size: 12px;">
+        <ui:include src="menu.xhtml"/>
+        <br></br>
+        <h:form style="font-size: 12px;">
+            <div class="ui-fluid">
+                <c:set var="myVar" scope="request" />
+                <p:panel header="All Temple Services">
+                    <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:dataTable id="products"
+                                     var="product"
+                                     rowKey="#{product.productId}"
+                                     selection="#{productBean.selectedProduct}"
+                                     selectionMode="single"
+                                     style="margin-bottom:0; font-size: 12px;"
+                                     value="#{productBean.products}"
+                                     reflow="true"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     filteredValue="#{productBean.filteredProducts}"
+                                     rowsPerPageTemplate="25,100,500">
+                            <c:set var="myVar" value="#{product.name}"/>
+                            <p:column headerText="Name" filterBy="#{product.name}" filterMatchMode="contains" sortBy="#{product.name}">
+                                <h:outputText value="#{product.name}" />
+                            </p:column>
+
+                            <p:column headerText="Location" filterBy="#{product.location}" filterMatchMode="contains" sortBy="#{product.location}">
+                                <h:outputText value="#{product.location}" />
+                            </p:column>
+
+                            <p:column headerText="Schedule" filterBy="#{product.schedule}" filterMatchMode="contains" sortBy="#{product.schedule}">
+                                <h:outputText value="#{product.schedule}" />
+                            </p:column>
+
+                            <p:column headerText="Date of Service" filterBy="#{product.dateOfService}" filterMatchMode="contains" sortBy="#{product.dateOfService}">
+                                <h:outputText value="#{product.dateOfService}">
+                                    <f:convertDateTime pattern="MM/dd/YYYY" type="date" timeZone="US/Mountain"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Time of Service" filterBy="#{product.timeOfService}" filterMatchMode="contains" sortBy="#{product.timeOfService}">
+                                <h:outputText value="#{product.timeOfService}">
+                                    <f:convertDateTime pattern="HH:mm" type="time" timeZone="US/Mountain"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Price" filterBy="#{product.price}" filterMatchMode="contains" sortBy="#{product.price}">
+                                <h:outputText value="#{product.price}">
+                                    <f:convertNumber type="currency" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Description" filterBy="#{product.description}" filterMatchMode="contains" sortBy="#{product.description}">
+                                <h:outputText value="#{product.description}" />
+                            </p:column>
+
+                            <!--
+                            <p:column headerText="Created Date" filterBy="#{product.createdDate}" filterMatchMode="contains" sortBy="#{product.createdDate}" priority="7">
+                                <h:outputText value="#{product.createdDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Created User" filterBy="#{product.createdUser}" filterMatchMode="contains" sortBy="#{product.createdUser}" priority="8">
+                                <h:outputText value="#{product.createdUser}" />
+                            </p:column>
+
+                            <p:column headerText="Updated Date" filterBy="#{product.updatedDate}" filterMatchMode="contains" sortBy="#{product.updatedDate}" priority="9">
+                                <h:outputText value="#{product.updatedDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Updated User" filterBy="#{product.updatedUser}" filterMatchMode="contains" sortBy="#{product.updatedUser}" priority="10">
+                                <h:outputText value="#{product.updatedUser}" />
+                            </p:column>
+                            -->
+                            Test: #{myVar}
+                        </p:dataTable>
+                        Test: #{myVar}
+                    </p:panelGrid>
+                    Test: #{myVar}
+                    <p:contextMenu for="products">
+                        <p:menuitem value="View#{myVar}" update="productDetail" icon="ui-icon-search" oncomplete="PF('productDialog').show()"/>
+                        <p:menuitem value="Edit#{myVar}" update="productDetail" icon="ui-icon-search" oncomplete="PF('productDialog').show()"/>
+                        <p:menuitem value="Delete#{myVar}" update="products" icon="ui-icon-close" actionListener="#{productBean.deleteProduct}"/>
+                        <p:menuitem value="Test#{myVar}" rendered="#{myVar eq 'Sri Mahalakshmi Kumkumarchana'}" update="products" icon="ui-icon-close" actionListener="#{productBean.deleteProduct}"/>
+                    </p:contextMenu>
+
+                    <p:dialog header="Product Info" widgetVar="productDialog" style="width: 50%" appendToBody="true" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+                        <p:outputPanel id="productDetail">
+
+                                <p:panelGrid  columns="2" rendered="#{not empty productBean.selectedProduct}" columnClasses="label,value">
+
+                                    <h:outputText value="Name" />
+                                    <h:inputText value="#{productBean.selectedProduct.name}" />
+
+                                    <h:outputText value="Location:" />
+                                    <h:inputText value="#{productBean.selectedProduct.location}"/>
+
+                                    <h:outputText value="Schedule:" />
+                                    <h:inputText value="#{productBean.selectedProduct.schedule}"/>
+
+                                    <h:outputText value="Date of Service:" />
+                                    <h:inputText value="#{productBean.selectedProduct.dateOfService}">
+                                        <f:convertDateTime pattern = "MM/dd/yyyy" timeZone="US/Mountain"/>
+                                    </h:inputText>
+
+                                    <h:outputText value="Time of Service:" />
+                                    <h:inputText value="#{productBean.selectedProduct.timeOfService}">
+                                        <f:convertDateTime pattern = "HH:mm" timeZone="US/Mountain"/>
+                                    </h:inputText>
+
+                                    <h:outputText value="Description:" />
+                                    <h:inputText value="#{productBean.selectedProduct.description}"/>
+
+                                    <h:outputText value="Price" />
+                                    <h:inputText value="$#{productBean.selectedProduct.price}" />
+
+                                    <p:commandButton id="commandButton1" value="Save" actionListener="#{productBean.updateProduct}" oncomplete="PF('productDialog').hide()"/>
+                                    <p:commandButton value="Cancel" actionListener="#{productBean.cancel()}"/>
+
+                                </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>

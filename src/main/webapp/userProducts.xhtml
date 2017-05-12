@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+</h:head>
+<h:body style="font-size: 12px;">
+    <ui:include src="menu.xhtml"/>
+    <br></br>
+    <h:form>
+    <p:panel header="User Services" style="font-size: 12px;">
+
+
+        <p:dataTable id="userProducts"
+                     var="userProduct"
+                     style="font-size: 12px;"
+                     value="#{userBean.userProducts}"
+                     reflow="true"
+                     rows="25"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                     filteredValue="#{productBean.filteredProducts}"
+                     rowsPerPageTemplate="25,100,500">
+
+            <f:facet name="{Exporters}">
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="tbl" fileName="userProducts" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="tbl" fileName="userProducts"/>
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                    <p:dataExporter type="csv" target="tbl" fileName="userProducts" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                    <p:dataExporter type="xml" target="tbl" fileName="userProducts" />
+                </h:commandLink>
+            </f:facet>
+
+            <p:column headerText="Name" filterBy="#{userProduct.product.name}" filterMatchMode="contains" sortBy="#{userProduct.product.name}">
+                <h:outputText value="#{userProduct.product.name}" />
+            </p:column>
+
+            <p:column headerText="Location" filterBy="#{userProduct.product.location}" filterMatchMode="contains" sortBy="#{userProduct.product.location}">
+                <h:outputText value="#{userProduct.product.location}" />
+            </p:column>
+
+            <p:column headerText="Schedule" filterBy="#{userProduct.product.schedule}" filterMatchMode="contains" sortBy="#{userProduct.product.schedule}">
+                <h:outputText value="#{userProduct.product.schedule}" />
+            </p:column>
+
+            <p:column headerText="Price" filterBy="#{userProduct.product.price}" filterMatchMode="contains" sortBy="#{userProduct.product.price}">
+                <h:outputText value="#{userProduct.product.price}" >
+                    <f:convertNumber currencySymbol="$" type="currency"/>
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Status" filterBy="#{userProduct.status}" filterMatchMode="contains" sortBy="#{userProduct.status}">
+                <h:outputText value="#{userProduct.status}" />
+            </p:column>
+
+            <p:column headerText="Notes" filterBy="#{userProduct.notes}" filterMatchMode="contains" sortBy="#{userProduct.notes}">
+                <h:outputText value="#{userProduct.notes}" />
+            </p:column>
+
+            <p:column headerText="Date and Time" filterBy="#{userProduct.dateAndTime}" filterMatchMode="contains" sortBy="#{userProduct.dateAndTime}">
+                <h:outputText value="#{userProduct.dateAndTime}" />
+            </p:column>
+        </p:dataTable>
+
+    </p:panel>
+    </h:form>
+</h:body>
+</html>

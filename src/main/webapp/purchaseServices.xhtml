@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Add Temple Service</title>
+</h:head>
+
+<h:body style="font-size: 12px;">
+    <ui:include src="menu.xhtml"/>
+    <br></br>
+    <h:form id="serviceRegistrationForm" style="font-size: 12px;">
+        <p:messages autoUpdate="true"/>
+        <div class="ui-fluid">
+            <p:panel header="Please signup for temple services here." style="font-size: 12px;">
+
+
+
+
+                <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:panel header="Selecet Services (Required)" style="font-size: 12px;">
+                        <p:dataTable id="checkboxDT"
+                                     var="product"
+                                     value="#{userBean.products}"
+                                     selection="#{userBean.selectedProducts}"
+                                     rowKey="#{product.productId}"
+                                     rows="15"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     filteredValue="#{userBean.filteredProducts}"
+                                     rowsPerPageTemplate="15,50,200,500"
+                                     style="margin-bottom:0; font-size: 12px;">
+                            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                            <p:column headerText="Name" filterBy="#{product.name}" filterMatchMode="contains" sortBy="#{product.name}" >
+                                <h:outputText value="#{product.name}" />
+                            </p:column>
+                            <p:column headerText="Location" filterBy="#{product.location}" filterMatchMode="contains" sortBy="#{product.location}" >
+                                <h:outputText value="#{product.location}" />
+                            </p:column>
+                            <p:column headerText="Schedule" filterBy="#{product.schedule}" filterMatchMode="contains" sortBy="#{product.schedule}" >
+                                <h:outputText value="#{product.schedule}" />
+                            </p:column>
+                            <p:column headerText="Date Of Service" filterBy="#{product.dateOfService}" filterMatchMode="contains" sortBy="#{product.dateOfService}" >
+                                <h:outputText value="#{product.dateOfService}">
+                                    <f:convertDateTime pattern="MM/dd/YYYY" type="date" timeZone="US/Mountain"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Time Of Service" filterBy="#{product.timeOfService}" filterMatchMode="contains" sortBy="#{product.timeOfService}" >
+                                <h:outputText value="#{product.timeOfService}">
+                                    <f:convertDateTime pattern="HH:mm" type="time" timeZone="US/Mountain"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Price" filterBy="#{product.price}" filterMatchMode="contains" sortBy="#{product.price}" >
+                                <h:outputText value="#{product.price}" >
+                                    <f:convertNumber type="currency" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </p:panelGrid>
+                <br></br>
+                <p:panelGrid columns="2" columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:panel header="Additional Notes">
+                        <h:panelGrid columns="2" cellpadding="2" style="font-size: 12px;">
+                            <p:inputTextarea id="additionalNotes" maxlength="500" cols="40" rows="10" placeholder="Any Notes" value="#{userBean.additionalNotes}" label="Additional Notes"/>
+                            <p:message for="additionalNotes" />
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="Date and Time are required for custom scheduled services">
+                        <h:panelGrid columns="2" cellpadding="2" style="font-size: 12px;">
+                            <p:calendar id="dateAndTime" value="#{userBean.dateAndTime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                            <p:message for="dateAndTime" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:panelGrid>
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <label style="font-size: 20px; font-weight: bold;">Please wait</label>
+                </p:dialog>
+
+                <br></br>
+                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:commandButton value="Save" actionListener="#{userBean.purchaseServices()}"/>
+                    <p:commandButton action="#{userBean.cancel()}" value="Cancel" />
+                </p:panelGrid>
+            </p:panel>
+        </div>
+    </h:form>
+</h:body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Add Temple Service</title>
+</h:head>
+
+<h:body style="font-size: 12px;">
+    <ui:include src="menu.xhtml"/>
+    <br></br>
+    <h:form id="serviceRegistrationForm" style="font-size: 12px;">
+        <p:messages autoUpdate="true"/>
+        <div class="ui-fluid">
+            <p:panel header="Please register" style="font-size: 12px;">
+                <p:panelGrid columns="2" columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:panel header="Your Details" style="font-size: 12px;">
+                        <h:panelGrid columns="6" cellpadding="2" style="font-size: 12px;">
+                            <p:outputLabel value="First Name (Required)"/>
+                            <p:inputText id="firstName" size="20" maxlength="30"  placeholder="First Name" value="#{userBean.user.firstName}" label="First Name"/>
+                            <p:message for="firstName" />
+
+                            <p:outputLabel value="Last Name (Required)"/>
+                            <p:inputText id="lastName" size="20" maxlength="30"  placeholder="Last Name" value="#{userBean.user.lastName}" label="Last Name"/>
+                            <p:message for="lastName" />
+
+                            <p:outputLabel value="EMail (Required)"/>
+                            <p:inputText id="email" size="20" maxlength="30" placeholder="EMail" value="#{userBean.user.email}" label="EMail"/>
+                            <p:message for="email" />
+
+                            <p:outputLabel value="Phone Number (Required)"/>
+                            <p:inputText id="phoneNumber" size="20" maxlength="10"  placeholder="Phone Number" value="#{userBean.user.phoneNumber}" label="Phone Number"/>
+                            <p:message for="phoneNumber" />
+
+                            <p:outputLabel value="Password (Required)"/>
+                            <p:inputText id="password" size="20" maxlength="20"  placeholder="Password" value="#{userBean.user.password}" label="Password"/>
+                            <p:message for="password"/>
+
+                            <p:outputLabel value="Re-Enter Password (Required)"/>
+                            <p:inputText id="rePassword" size="20" maxlength="20"  placeholder="Re-enter Password" value="#{userBean.user.rePassword}" label="Re-Enter Password"/>
+                            <p:message for="rePassword"/>
+
+                            <p:outputLabel value="Street Address (Required)"/>
+                            <p:inputText id="streetAddress" size="20" maxlength="30"  placeholder="Street Address" value="#{userBean.user.streetAddress}" label="Street Address"/>
+                            <p:message for="streetAddress" />
+
+                            <p:outputLabel value="City (Required)"/>
+                            <p:inputText id="city" size="20" maxlength="30"  placeholder="City" value="#{userBean.user.city}" label="City"/>
+                            <p:message for="city" />
+
+                            <p:outputLabel value="State (Required)"/>
+                            <p:inputText id="state" size="20" maxlength="30"  placeholder="State" value="#{userBean.user.state}" label="State"/>
+                            <p:message for="state" />
+
+                            <p:outputLabel value="Zip (Required)"/>
+                            <p:inputText id="zip" size="20" maxlength="5"  placeholder="Zip" value="#{userBean.user.zip}" label="Zip"/>
+                            <p:message for="zip" />
+
+                            <p:outputLabel value="Family Gothram"/>
+                            <p:inputText id="familyGothram" size="20" maxlength="30"  placeholder="Family Gothram" value="#{userBean.user.familyGothram}" label="Family Gothram"/>
+                            <p:message for="familyGothram" />
+
+                            <p:outputLabel value="Nakshathram"/>
+                            <p:inputText id="primaryNakshathram" size="20" maxlength="30"  placeholder="Your Nakshathram" value="#{userBean.user.primaryNakshathram}" label="Your Nakshathram"/>
+                            <p:message for="primaryNakshathram" />
+
+                            <!--
+                            <p:outputLabel value="Padam"/>
+                            <p:inputText id="primaryPadam" size="20" maxlength="30"  placeholder="Your Padam" value="#{userBean.user.primaryPadam}" label="Your Padam"/>
+                            <p:message for="primaryPadam" />
+                            -->
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="Spouse Details">
+                        <h:panelGrid columns="3" cellpadding="2" style="font-size: 12px;">
+                            <p:outputLabel value="Spouse Full Name"/>
+                            <p:inputText id="spouseName" size="20" maxlength="30"  placeholder="Spouse Full Name" value="#{userBean.user.spouseName}" label="Spouse Name"/>
+                            <p:message for="spouseName" />
+
+                            <p:outputLabel value="Spouse Nakshathram"/>
+                            <p:inputText id="spouseNakshathram" size="20" maxlength="30" placeholder="Spouse Nakshathram" value="#{userBean.user.spouseNakshathram}" label="Spouse Nakshathram"/>
+                            <p:message for="spouseNakshathram" />
+
+                            <!--
+                            <p:outputLabel value="Padam"/>
+                            <p:inputText id="spousePadam" size="20" maxlength="30"  placeholder="Padam" value="#{userBean.user.spousePadam}" label="Padam"/>
+                            <p:message for="spousePadam" />
+                            -->
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:panelGrid>
+                <br></br>
+                <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:accordionPanel activeIndex="null">
+                        <p:tab title="CLICK HERE TO PROVIDE MORE DETAILS...">
+                            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank">
+
+                                <p:panel header="1st Child details">
+                                    <h:panelGrid columns="3" cellpadding="2" style="font-size: 12px;">
+                                        <p:outputLabel value="Full Name"/>
+                                        <p:inputText id="child1Name" size="20" maxlength="30"  placeholder="Name" value="#{userBean.user.child1Name}" label="Name"/>
+                                        <p:message for="child1Name" />
+
+                                        <p:outputLabel value="Nakshathram"/>
+                                        <p:inputText id="child1Nakshathram" size="20" maxlength="30"  placeholder="Nakshathram" value="#{userBean.user.child1Nakshathram}" label="Nakshathram"/>
+                                        <p:message for="child1Nakshathram" />
+
+                                        <!--
+                                        <p:outputLabel value="Padam"/>
+                                        <p:inputText id="child1Padam" size="20" maxlength="30"  placeholder="Padam" value="#{userBean.user.child1Padam}" label="Padam"/>
+                                        <p:message for="child1Padam" />
+                                        -->
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel header="2nd Child details">
+                                    <h:panelGrid columns="3" cellpadding="2" style="font-size: 12px;">
+                                        <p:outputLabel value="Full Name"/>
+                                        <p:inputText id="child2Name" size="20" maxlength="30"  placeholder="Name" value="#{userBean.user.child2Name}" label="Name"/>
+                                        <p:message for="child2Name" />
+
+                                        <p:outputLabel value="Nakshathram"/>
+                                        <p:inputText id="child2Nakshathram" size="20" maxlength="30"  placeholder="Nakshathram" value="#{userBean.user.child2Nakshathram}" label="Nakshathram"/>
+                                        <p:message for="child2Nakshathram" />
+
+                                        <!--
+                                        <p:outputLabel value="Padam"/>
+                                        <p:inputText id="child2Padam" size="20" maxlength="30"  placeholder="Padam" value="#{userBean.user.child2Padam}" label="Padam"/>
+                                        <p:message for="child2Padam" />
+                                        -->
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel header="3rd Child details">
+                                    <h:panelGrid columns="3" cellpadding="2" style="font-size: 12px;">
+                                        <p:outputLabel value="Full Name"/>
+                                        <p:inputText id="child3Name" size="20" maxlength="30"  placeholder="Name" value="#{userBean.user.child3Name}" label="Name"/>
+                                        <p:message for="child3Name" />
+
+                                        <p:outputLabel value="Nakshathram"/>
+                                        <p:inputText id="child3Nakshathram" size="20" maxlength="30"  placeholder="Nakshathram" value="#{userBean.user.child3Nakshathram}" label="Nakshathram"/>
+                                        <p:message for="child3Nakshathram" />
+
+                                        <!--
+                                        <p:outputLabel value="Padam"/>
+                                        <p:inputText id="child3Padam" size="20" maxlength="30"  placeholder="Padam" value="#{userBean.user.child3Padam}" label="Padam"/>
+                                        <p:message for="child3Padam" />
+                                        -->
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <p:panel header="4th Child details">
+                                    <h:panelGrid columns="3" cellpadding="2" style="font-size: 12px;">
+                                        <p:outputLabel value="Full Name"/>
+                                        <p:inputText id="child4Name" size="20" maxlength="30"  placeholder="Name" value="#{userBean.user.child4Name}" label="Name"/>
+                                        <p:message for="child4Name" />
+
+                                        <p:outputLabel value="Nakshathram"/>
+                                        <p:inputText id="child4Nakshathram" size="20" maxlength="30"  placeholder="Nakshathram" value="#{userBean.user.child4Nakshathram}" label="Nakshathram"/>
+                                        <p:message for="child4Nakshathram" />
+
+                                        <!--
+                                        <p:outputLabel value="Padam"/>
+                                        <p:inputText id="child4Padam" size="20" maxlength="30"  placeholder="Padam" value="#{userBean.user.child4Padam}" label="Padam"/>
+                                        <p:message for="child4Padam" />
+                                        -->
+
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+                </p:panelGrid>
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <label style="font-size: 20px; font-weight: bold;">Please wait</label>
+                </p:dialog>
+                <br></br>
+                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" style="font-size: 12px;">
+                    <p:commandButton value="Save" actionListener="#{userBean.registerUser()}"/>
+                    <p:commandButton action="#{userBean.cancel()}" value="Cancel" />
+                </p:panelGrid>
+            </p:panel>
+        </div>
+    </h:form>
+</h:body>
+
+</html>

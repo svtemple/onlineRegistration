@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+</h:head>
+<h:body style="font-size: 12px;">
+    <ui:include src="menu.xhtml"/>
+    <br></br>
+    <h:form>
+        <p:panel header="All Devotees and Services" style="font-size: 12px;">
+            <h3>Export Data</h3>
+
+            <h:commandLink>
+                <h:outputText name="Export to Excel" style="font-weight: bold; color: brown"/>
+                <p:dataExporter type="xls" target="userProducts" fileName="devoteeServices"/>
+            </h:commandLink>
+
+            <h:commandLink>
+                <h:outputText name="Export to PDF" style="font-weight: bold; color: brown"/>
+                <p:dataExporter type="pdf" target="userProducts" fileName="devoteeServices"/>
+            </h:commandLink>
+            <p:dataTable id="userProducts"
+                         var="userProduct"
+                         style="font-size: 12px;"
+                         value="#{userBean.userProducts}"
+                         reflow="true"
+                         rows="25"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         filteredValue="#{productBean.filteredProducts}"
+                         rowsPerPageTemplate="25,100,500">
+
+                <p:column headerText="Devotee Name" filterBy="#{userProduct.user.firstName} #{userProduct.user.lastName}" filterMatchMode="contains" sortBy="#{userProduct.user.firstName} #{userProduct.user.lastName}">
+                    <h:outputText value="#{userProduct.user.firstName} #{userProduct.user.lastName}" />
+                </p:column>
+
+                <p:column headerText="Email" filterBy="#{userProduct.user.email}" filterMatchMode="contains" sortBy="#{userProduct.user.email}">
+                    <h:outputText value="#{userProduct.user.email}" />
+                </p:column>
+
+                <p:column headerText="Family Gothram" filterBy="#{userProduct.user.familyGothram}" filterMatchMode="contains" sortBy="#{userProduct.user.familyGothram}">
+                    <h:outputText value="#{userProduct.user.familyGothram}" />
+                </p:column>
+
+                <p:column headerText="Phone Number" filterBy="#{userProduct.user.phoneNumber}" filterMatchMode="contains" sortBy="#{userProduct.user.phoneNumber}">
+                    <h:outputText value="#{userProduct.user.phoneNumber}" />
+                </p:column>
+
+                <p:column headerText="Primary Nakshathram" filterBy="#{userProduct.user.primaryNakshathram}" filterMatchMode="contains" sortBy="#{userProduct.user.primaryNakshathram}">
+                    <h:outputText value="#{userProduct.user.primaryNakshathram}" />
+                </p:column>
+
+                <p:column headerText="Spouse Name" filterBy="#{userProduct.user.spouseName}" filterMatchMode="contains" sortBy="#{userProduct.user.spouseName}">
+                    <h:outputText value="#{userProduct.user.spouseName}" />
+                </p:column>
+
+                <p:column headerText="Spouse Nakshathram" filterBy="#{userProduct.user.spouseNakshathram}" filterMatchMode="contains" sortBy="#{userProduct.user.spouseNakshathram}">
+                    <h:outputText value="#{userProduct.user.spouseNakshathram}" />
+                </p:column>
+
+                <p:column headerText="Name" filterBy="#{userProduct.product.name}" filterMatchMode="contains" sortBy="#{userProduct.product.name}">
+                    <h:outputText value="#{userProduct.product.name}" />
+                </p:column>
+
+                <p:column headerText="Location" filterBy="#{userProduct.product.location}" filterMatchMode="contains" sortBy="#{userProduct.product.location}">
+                    <h:outputText value="#{userProduct.product.location}" />
+                </p:column>
+
+                <p:column headerText="Schedule" filterBy="#{userProduct.product.schedule}" filterMatchMode="contains" sortBy="#{userProduct.product.schedule}">
+                    <h:outputText value="#{userProduct.product.schedule}" />
+                </p:column>
+
+                <p:column headerText="Price" filterBy="#{userProduct.product.price}" filterMatchMode="contains" sortBy="#{userProduct.product.price}">
+                    <h:outputText value="#{userProduct.product.price}" >
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Status" filterBy="#{userProduct.status}" filterMatchMode="contains" sortBy="#{userProduct.status}">
+                    <h:outputText value="#{userProduct.status}" />
+                </p:column>
+
+                <p:column headerText="Notes" filterBy="#{userProduct.notes}" filterMatchMode="contains" sortBy="#{userProduct.notes}">
+                    <h:outputText value="#{userProduct.notes}" />
+                </p:column>
+
+                <p:column headerText="Date and Time" filterBy="#{userProduct.dateAndTime}" filterMatchMode="contains" sortBy="#{userProduct.dateAndTime}">
+                    <h:outputText value="#{userProduct.dateAndTime}" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
