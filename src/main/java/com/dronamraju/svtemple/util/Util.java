@@ -40,7 +40,7 @@ public class Util {
     private static Matcher matcher;
 
     public static boolean isValidDate(Date dateToValidate){
-        log.info("Calendar.getInstance().getTime(): " + Calendar.getInstance().getTime());
+        //log.info("Calendar.getInstance().getTime(): " + Calendar.getInstance().getTime());
         if (dateToValidate.before(Calendar.getInstance().getTime())) {
             return false;
         }
@@ -49,7 +49,7 @@ public class Util {
 
     public static String newPassword() {
         String newPassword = UUID.randomUUID().toString();
-        log.info("newPassword: " + newPassword);
+        //log.info("newPassword: " + newPassword);
         return newPassword;
     }
 

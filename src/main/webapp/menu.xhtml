@@ -5,13 +5,23 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
 
-        <p:commandLink styleClass="altColor" value="All Users" actionListener="#{userBean.goToAllUsersPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
+        <br></br><p:commandLink styleClass="altColor" value="My Account" actionListener="#{userBean.goToUserProfilePage}" rendered="#{userBean.loggedInUser != null}" />
+        <br></br><p:commandLink styleClass="altColor" value="My Services" actionListener="#{userBean.goToMyServicePage}" rendered="#{userBean.loggedInUser != null}" />
+        <br></br><p:commandLink styleClass="altColor" value="Purchase Temple Services" actionListener="#{userBean.goToPurchaseServicesPage}" rendered="#{userBean.loggedInUser != null}" />
+
+
+        <br></br>
+        <br></br><p:commandLink styleClass="altColor" value="All Users" actionListener="#{userBean.goToAllUsersPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
         <br></br><p:commandLink styleClass="altColor" value="All Temple Services" actionListener="#{userBean.goToAllServicesPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
         <br></br><p:commandLink styleClass="altColor" value="All Devotees and Services" actionListener="#{userBean.goToAllDevoteeServicesPage}" rendered="#{userBean.loggedInUser.isAdmin == 'Y'}" />
         <br></br><p:commandLink styleClass="altColor" value="Add New Temple Service" actionListener="#{userBean.goToAddNewServicePage}" rendered="#{userBean.loggedInUser != null and userBean.loggedInUser.isAdmin == 'Y'}" />
-        <br></br><p:commandLink styleClass="altColor" value="Purchase Temple Services" actionListener="#{userBean.goToPurchaseServicesPage}" rendered="#{userBean.loggedInUser != null}" />
-        <br></br><p:commandLink styleClass="altColor" value="My Account" actionListener="#{userBean.goToUserProfilePage}" rendered="#{userBean.loggedInUser != null}" />
-        <br></br><p:commandLink styleClass="altColor" value="My Services" actionListener="#{userBean.goToMyServicePage}" rendered="#{userBean.loggedInUser != null}" />
+
+
+
+        <br></br>
+        <br></br><p:commandLink styleClass="altColor" value="All Donors" actionListener="#{userBean.goToAllDonorsPage}" rendered="#{userBean.loggedInUser != null and userBean.loggedInUser.isAdmin == 'Y'}" />
+
+
+        <br></br>
         <br></br><p:commandLink styleClass="altColor" value="Logout" actionListener="#{userBean.logout}" rendered="#{userBean.loggedInUser != null}" />
-        <br></br><p:commandLink styleClass="altColor" value="All DOnors" actionListener="#{userBean.goToAllDonorsPage}" rendered="#{userBean.loggedInUser != null and userBean.loggedInUser.isAdmin == 'Y'}" />
 </ui:composition>

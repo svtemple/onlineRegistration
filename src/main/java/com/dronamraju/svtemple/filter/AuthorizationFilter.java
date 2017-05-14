@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        log.info("request.getServletPath(): " + request.getServletPath());
+//        log.info("request.getServletPath(): " + request.getServletPath());
         if (request.getSession().getAttribute("loggedInUser") == null && !(request.getServletPath().contains("login.xhtml")
                 || request.getServletPath().contains("userRegistration.xhtml")
                 || request.getServletPath().contains("javax.faces.resource")

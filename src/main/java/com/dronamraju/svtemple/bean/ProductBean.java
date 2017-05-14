@@ -1,12 +1,10 @@
 package com.dronamraju.svtemple.bean;
 
-import com.dronamraju.svtemple.dao.ProductDAO;
 import com.dronamraju.svtemple.model.Product;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
 import java.util.List;
@@ -19,6 +17,8 @@ import com.dronamraju.svtemple.util.SendEmail;
 import com.dronamraju.svtemple.util.Util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -29,7 +29,7 @@ import com.dronamraju.svtemple.service.ProductService;
  */
 
 @ManagedBean(name = "productBean")
-@RequestScoped
+@SessionScoped
 public class ProductBean implements Serializable {
 
     private static Log log = LogFactory.getLog(ProductBean.class);
@@ -126,14 +126,13 @@ public class ProductBean implements Serializable {
             return;
         }
 
-        ProductDAO productDAO = new ProductDAO();
         //Product product = new Product(name, description, price, location, schedule, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), "Manu", "Manu");
         product.setCreatedDate(Calendar.getInstance().getTime());
         product.setUpdatedDate(Calendar.getInstance().getTime());
         product.setCreatedUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
         product.setUpdatedUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
         log.info("product: " + product);
-        productDAO.save(product);
+        productService.saveProduct(product);
         log.info("New Temple Service has been successfully saved.");
         products = productService.getProducts();
         FacesUtil.redirect("products.xhtml");

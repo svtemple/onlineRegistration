@@ -13,7 +13,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 		@UniqueConstraint(columnNames = "LAST_NAME"),
 		@UniqueConstraint(columnNames = "EMAIL"),
 		@UniqueConstraint(columnNames = "PHONE_NUMBER") })
-@SessionScoped
 public class User implements java.io.Serializable {
 	private Long userId;
 	private String firstName;

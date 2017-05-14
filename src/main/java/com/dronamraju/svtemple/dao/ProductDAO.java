@@ -43,7 +43,7 @@ public class ProductDAO {
             Query query = posEntityManager.createQuery("SELECT product FROM Product product", Product.class);
             List results = query.getResultList();
             List<Product> products = query.getResultList();
-            log.info("ProductDAO - Products: " + products);
+//            log.info("ProductDAO - Products: " + products);
             return products;
         } catch (Exception e) {
             if (entityTransaction.isActive()) {
@@ -59,7 +59,7 @@ public class ProductDAO {
             Query query = posEntityManager.createQuery("SELECT product FROM Product product WHERE productId = :userId", Product.class);
             query.setParameter("userId", userId);
             List<Product> products = query.getResultList();
-            log.info("ProductDAO - Products: " + products);
+//            log.info("ProductDAO - Products: " + products);
             return products;
         } catch (Exception e) {
             if (entityTransaction.isActive()) {
@@ -72,7 +72,7 @@ public class ProductDAO {
     public void save(Product product) {
         EntityTransaction entityTransaction = posEntityManager.getTransaction();
         try {
-            log.info("Saving product: " + product);
+//            log.info("Saving product: " + product);
             entityTransaction.begin();
             posEntityManager.persist(product);
             entityTransaction.commit();
@@ -85,7 +85,7 @@ public class ProductDAO {
     public void save(UserProduct userProduct){
         EntityTransaction entityTransaction = posEntityManager.getTransaction();
         try {
-            log.info("Saving userProduct: " + userProduct);
+//            log.info("Saving userProduct: " + userProduct);
             posEntityManager.getTransaction().begin();
             posEntityManager.persist(userProduct);
             posEntityManager.getTransaction().commit();
@@ -160,7 +160,7 @@ public class ProductDAO {
                 userProduct.setUser(findUser(userProduct.getUserId()));
                 userProduct.setProduct(findProduct(userProduct.getProductId()));
             }
-            log.info("userProducts: " + userProducts.size());
+//            log.info("userProducts: " + userProducts.size());
             if (userProducts == null || userProducts.size() < 1) {
                 return null;
             }

@@ -40,7 +40,7 @@ public class ParakamaniDAO {
         try {
             Query query = parakamaniEntityManager.createQuery("SELECT donor FROM Donor donor", Donor.class);
             List<Donor> donors = query.getResultList();
-            log.info("ParakamaniDAO - Donors: " + donors);
+//            log.info("ParakamaniDAO - Donors: " + donors);
             return donors;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -55,7 +55,7 @@ public class ParakamaniDAO {
         parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
         try {
-            log.info("Saving donor: " + donor);
+//            log.info("Saving donor: " + donor);
             entityTransaction.begin();
             parakamaniEntityManager.persist(donor);
             entityTransaction.commit();

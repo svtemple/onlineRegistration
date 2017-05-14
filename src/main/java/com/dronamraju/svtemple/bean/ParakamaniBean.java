@@ -5,7 +5,6 @@ import com.dronamraju.svtemple.model.Donor;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
 import java.util.List;
@@ -128,7 +127,7 @@ public class ParakamaniBean implements Serializable {
         donor.setUpdateDate(Calendar.getInstance().getTime());
         donor.setCreateUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
         donor.setUpdateUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
-        log.info("donor: " + donor);
+        //log.info("donor: " + donor);
         parakamaniService.saveDonor(donor);
         log.info("New Temple Service has been successfully saved.");
         donors = parakamaniService.getDonors();
@@ -136,7 +135,7 @@ public class ParakamaniBean implements Serializable {
     }
 
     public void updateDonor() {
-        log.info("selectedDonor: " + selectedDonor);
+        //log.info("selectedDonor: " + selectedDonor);
         if (FacesUtil.getRequest().getSession().getAttribute("loggedInUser") == null) {
             FacesUtil.redirect("login.xhtml");
         }

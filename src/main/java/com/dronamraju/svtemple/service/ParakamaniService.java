@@ -2,6 +2,7 @@ package com.dronamraju.svtemple.service;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import com.dronamraju.svtemple.dao.ParakamaniDAO;
 import com.dronamraju.svtemple.model.Donor;

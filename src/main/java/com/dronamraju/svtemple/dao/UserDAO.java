@@ -19,14 +19,13 @@ public class UserDAO {
 	private static Log log = LogFactory.getLog(UserDAO.class);
 
 	EntityManager posEntityManager = EntityManagerUtil.getPOSEntityManager();
-	EntityManager parakamaniEntityManager = EntityManagerUtil.getParakamaniEntityManager();
 
-	public void saveCat(Product cat){
+	public void saveCat(Product product){
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
-			log.info("Saving cat: " + cat);
+//			log.info("Saving product: " + product);
 			entityTransaction.begin();
-			posEntityManager.persist(cat);
+			posEntityManager.persist(product);
 			entityTransaction.commit();
 		} catch (Exception e) {
 			if (entityTransaction.isActive()) {
@@ -54,13 +53,12 @@ public class UserDAO {
 	public User saveUser(User user){
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
-			log.info("Saving user: " + user);
-			log.info("posEntityManager: " + posEntityManager);
+			log.info("Saving user...");
 			User savedUser = null;
 			entityTransaction.begin();
 			savedUser = posEntityManager.merge(user);
 			entityTransaction.commit();
-			log.info("savedUser: " + savedUser);
+//			log.info("savedUser: " + savedUser);
 			return savedUser;
 		} catch (Exception e) {
 			if (entityTransaction.isActive()) {
@@ -102,7 +100,7 @@ public class UserDAO {
 	}
 
 	public User findUser(String email, String password) {
-		log.info("email, password: " + email + ", " + password);
+		log.info("fing user by meail, password...");
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
 			Query query = posEntityManager.createQuery("SELECT user FROM User user WHERE email = :email and password = :password", User.class);
@@ -113,7 +111,7 @@ public class UserDAO {
 				return null;
 			}
 			User user = users.get(0);
-			log.info("findUser - user: " + user);
+			log.info("findUser - user: " + user.getFirstName() + ", " + user.getLastName() + ", " + user.getEmail());
 
 			return user;
 		} catch (Exception e) {
@@ -134,7 +132,7 @@ public class UserDAO {
 				userProduct.setUser(findUser(userProduct.getUserId()));
 				userProduct.setProduct(findProduct(userProduct.getProductId()));
 			}
-			log.info("userProducts: " + userProducts.size());
+//			log.info("userProducts: " + userProducts.size());
 			if (userProducts == null || userProducts.size() < 1) {
 				return null;
 			}
@@ -156,7 +154,7 @@ public class UserDAO {
 				userProduct.setUser(findUser(userProduct.getUserId()));
 				userProduct.setProduct(findProduct(userProduct.getProductId()));
 			}
-			log.info("userProducts: " + userProducts.size());
+//			log.info("userProducts: " + userProducts.size());
 			if (userProducts == null || userProducts.size() < 1) {
 				return null;
 			}
@@ -179,7 +177,7 @@ public class UserDAO {
 				userProduct.setUser(findUser(userProduct.getUserId()));
 				userProduct.setProduct(findProduct(userProduct.getProductId()));
 			}
-			log.info("userProducts: " + userProducts.size());
+//			log.info("userProducts: " + userProducts.size());
 			if (userProducts == null || userProducts.size() < 1) {
 				return null;
 			}
@@ -195,11 +193,11 @@ public class UserDAO {
 	public String findValue(String name) {
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
-			log.info("findValue: " + name);
+			log.info("findValue...");
 			Query query = posEntityManager.createQuery("SELECT value FROM configuration_table configuration WHERE configuration_name = :name", String.class);
 			query.setParameter("name", name);
 			List<String> values = query.getResultList();
-			log.info("values: " + values);
+//			log.info("values: " + values);
 			if (values != null && values.size() > 0) {
 				return values.get(0);
 			}
@@ -215,7 +213,7 @@ public class UserDAO {
 	public String findPassword(String email) {
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
-			log.info("email: " + email);
+			log.info("findPassword by email...");
 			Query query = posEntityManager.createQuery("SELECT password FROM User user WHERE email = :email", String.class);
 			query.setParameter("email", email);
 			List<String> values = query.getResultList();
@@ -233,13 +231,14 @@ public class UserDAO {
 	}
 
 	public boolean orderNumberExists(String orderNumber) {
+		log.info("orderNumberExists...");
 		EntityTransaction entityTransaction = posEntityManager.getTransaction();
 		try {
-			log.info("orderNumberExists: " + orderNumber);
+//			log.info("orderNumberExists: " + orderNumber);
 			Query query = posEntityManager.createQuery("SELECT orderNumber FROM UserProduct userProduct WHERE orderNumber = :orderNumber", String.class);
 			query.setParameter("orderNumber", orderNumber);
 			List<String> orderNumbers = query.getResultList();
-			log.info("orderNumbers: " + orderNumbers);
+//			log.info("orderNumbers: " + orderNumbers);
 			if (orderNumbers == null || orderNumbers.size() < 1) {
 				return false;
 			}
