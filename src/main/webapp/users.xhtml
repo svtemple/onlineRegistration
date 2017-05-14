@@ -8,55 +8,66 @@
     <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
 </h:head>
 <h:body style="font-size: 12px;">
-    <ui:include src="menu.xhtml"/>
-    <br></br>
-    <h:form>
-        <p:panel header="User Services" style="font-size: 12px;">
-            <h3>Export Users</h3>
-            <h:commandLink>
-                <h:outputText name="Export to Excel" style="font-weight: bold; color: brown"/>
-                <p:dataExporter type="xls" target="users" fileName="users"/>
-            </h:commandLink>
 
-            <h:commandLink>
-                <h:outputText name="Export to PDF" style="font-weight: bold; color: brown"/>
-                <p:dataExporter type="pdf" target="users" fileName="users"/>
-            </h:commandLink>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100" minSize="40" maxSize="200">
+            <center><h1 style="color: #800000">SRI VENKATESWARA SWAMY TEMPLE OF COLORADO</h1></center>
+        </p:layoutUnit>
 
-            <p:dataTable id="users"
-                         var="user"
-                         style="font-size: 12px;"
-                         value="#{userBean.users}"
-                         reflow="true"
-                         rows="25"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         filteredValue="#{productBean.filteredProducts}"
-                         rowsPerPageTemplate="25,100,500">
+        <p:layoutUnit position="west">
+            <ui:include src="menu.xhtml"/>
+        </p:layoutUnit>
 
-                <p:column headerText="First Name" filterBy="#{user.firstName}" filterMatchMode="contains" sortBy="#{user.firstName}">
-                    <h:outputText value="#{user.firstName}" />
-                </p:column>
+        <p:layoutUnit position="center">
+            <h:form>
+                <p:panel header="User Services" style="font-size: 12px;">
+                    <h3>Export Users</h3>
+                    <h:commandLink>
+                        <h:outputText name="Export to Excel" style="font-weight: bold; color: brown"/>
+                        <p:dataExporter type="xls" target="users" fileName="users"/>
+                    </h:commandLink>
 
-                <p:column headerText="Last Name" filterBy="#{user.lastName}" filterMatchMode="contains" sortBy="#{user.lastName}">
-                    <h:outputText value="#{user.lastName}" />
-                </p:column>
+                    <h:commandLink>
+                        <h:outputText name="Export to PDF" style="font-weight: bold; color: brown"/>
+                        <p:dataExporter type="pdf" target="users" fileName="users"/>
+                    </h:commandLink>
 
-                <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains" sortBy="#{user.email}">
-                    <h:outputText value="#{user.email}" />
-                </p:column>
+                    <p:dataTable id="users"
+                                 var="user"
+                                 style="font-size: 12px;"
+                                 value="#{userBean.users}"
+                                 reflow="true"
+                                 rows="25"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 filteredValue="#{productBean.filteredProducts}"
+                                 rowsPerPageTemplate="25,100,500">
 
-                <p:column headerText="Phone" filterBy="#{user.phoneNumber}" filterMatchMode="contains" sortBy="#{user.phoneNumber}">
-                    <h:outputText value="#{user.phoneNumber}"/>
-                </p:column>
+                        <p:column headerText="First Name" filterBy="#{user.firstName}" filterMatchMode="contains" sortBy="#{user.firstName}">
+                            <h:outputText value="#{user.firstName}" />
+                        </p:column>
 
-                <p:column headerText="Address" filterBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" filterMatchMode="contains" sortBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}">
-                    <h:outputText value="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" />
-                </p:column>
+                        <p:column headerText="Last Name" filterBy="#{user.lastName}" filterMatchMode="contains" sortBy="#{user.lastName}">
+                            <h:outputText value="#{user.lastName}" />
+                        </p:column>
 
-            </p:dataTable>
+                        <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains" sortBy="#{user.email}">
+                            <h:outputText value="#{user.email}" />
+                        </p:column>
 
-        </p:panel>
-    </h:form>
+                        <p:column headerText="Phone" filterBy="#{user.phoneNumber}" filterMatchMode="contains" sortBy="#{user.phoneNumber}">
+                            <h:outputText value="#{user.phoneNumber}"/>
+                        </p:column>
+
+                        <p:column headerText="Address" filterBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" filterMatchMode="contains" sortBy="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}">
+                            <h:outputText value="#{user.streetAddress}  #{user.city} #{user.state} #{user.zip}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:panel>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
 </h:body>
 </html>

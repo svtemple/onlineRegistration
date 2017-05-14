@@ -15,6 +15,17 @@
     <h:form style="font-size: 12px;">
         <div class="ui-fluid">
             <p:panel header="Donars - Report">
+                <center>
+                <h:commandLink>
+                    <b style="font-size: 18px;">Export To Excel</b>
+                    <p:dataExporter type="xls" target="donors" fileName="cars" pageOnly="true"/>
+                </h:commandLink>
+                &nbsp;&nbsp;&nbsp;
+                <h:commandLink>
+                    <b style="font-size: 18px;">Export To PDF</b>
+                    <p:dataExporter type="pdf" target="donors" fileName="cars" pageOnly="true" />
+                </h:commandLink>
+                </center>
                 <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank">
                     <p:dataTable id="donors"
                                  var="donor"
@@ -22,21 +33,9 @@
                                  value="#{parakamaniBean.donors}"
                                  rows="10"
                                  paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  filteredValue="#{parakamaniBean.filteredDonors}"
                                  rowsPerPageTemplate="25,100,500">
-
-                        <f:facet name="{Exporters}">
-                            <h:commandLink>
-                                <p:graphicImage name="../images/excel.png" width="24"/>
-                                <p:dataExporter type="xls" target="tbl" fileName="donors" />
-                            </h:commandLink>
-
-                            <h:commandLink>
-                                <p:graphicImage name="/images/pdf.png" width="24"/>
-                                <p:dataExporter type="pdf" target="tbl" fileName="donors"/>
-                            </h:commandLink>
-                        </f:facet>
 
                         <p:column headerText="Name" filterBy="#{donor.firstName}" filterMatchMode="contains" sortBy="#{donor.firstName}">
                             <h:outputText value="#{donor.firstName}" />
@@ -61,6 +60,7 @@
                         </p:column>
 
                     </p:dataTable>
+
                 </p:panelGrid>
 
             </p:panel>

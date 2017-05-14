@@ -10,58 +10,68 @@
 </h:head>
 
 <h:body style="font-size: 12px;">
-    <ui:include src="menu.xhtml"/>
-    <br></br>
-    <div class="ui-fluid">
-        <p:panel id="panel" header="You have purchased the below services with Sri Venkateswara Swamy Temple Of Colorado.">
-            <ui:repeat var="userProduct" value="#{userBean.userProducts}">
-                <h:panelGrid columns="2" cellpadding="2" style="font-size: 12px;">
-                    <p:outputLabel value="Order Number: "/>
-                    <p:outputLabel value="#{userProduct.orderNumber}"/>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100" minSize="40" maxSize="200">
+            <center><h1 style="color: #800000">SRI VENKATESWARA SWAMY TEMPLE OF COLORADO</h1></center>
+        </p:layoutUnit>
 
-                    <p:outputLabel value="Name: "/>
-                    <p:outputLabel value="#{userProduct.product.name}"/>
+        <p:layoutUnit position="west">
+            <ui:include src="menu.xhtml"/>
+        </p:layoutUnit>
 
-                    <p:outputLabel value="Price: "/>
-                    <p:outputLabel value="#{userProduct.product.price}">
+        <p:layoutUnit position="center">
+            <div class="ui-fluid">
+                <p:panel id="panel" header="You have purchased the below services with Sri Venkateswara Swamy Temple Of Colorado.">
+                    <ui:repeat var="userProduct" value="#{userBean.userProducts}">
+                        <h:panelGrid columns="2" cellpadding="2" style="font-size: 12px;">
+                            <p:outputLabel value="Order Number: "/>
+                            <p:outputLabel value="#{userProduct.orderNumber}"/>
+
+                            <p:outputLabel value="Name: "/>
+                            <p:outputLabel value="#{userProduct.product.name}"/>
+
+                            <p:outputLabel value="Price: "/>
+                            <p:outputLabel value="#{userProduct.product.price}">
+                                <f:convertNumber type="currency" />
+                            </p:outputLabel>
+
+                            <p:outputLabel value="Schedule: "/>
+                            <p:outputLabel value="#{userProduct.product.schedule}"/>
+
+                            <p:outputLabel value="Location: "/>
+                            <p:outputLabel value="#{userProduct.product.location}"/>
+
+                            <p:outputLabel value="Status: "/>
+                            <p:outputLabel value="#{userProduct.status}"/>
+
+                            <p:outputLabel value="Date and Time: " rendered="#{userProduct.dateAndTime != null}"/>
+                            <p:outputLabel value="#{userProduct.dateAndTime}" rendered="#{userProduct.dateAndTime != null}"/>
+
+                            <p:outputLabel value="Notes: " rendered="#{userProduct.notes != null}"/>
+                            <p:outputLabel value="#{userProduct.notes}" rendered="#{userProduct.notes != null}"/>
+                            <br></br>
+                        </h:panelGrid>
+                    </ui:repeat>
+                    <p:outputLabel value="Please enter the total amount of " style="color: brown; font-weight: bold; font-size: 25px"/>
+                    <p:outputLabel value="#{userBean.totalAmount}" style="color: brown; font-weight: bold; font-size: 25px">
                         <f:convertNumber type="currency" />
                     </p:outputLabel>
-
-                    <p:outputLabel value="Schedule: "/>
-                    <p:outputLabel value="#{userProduct.product.schedule}"/>
-
-                    <p:outputLabel value="Location: "/>
-                    <p:outputLabel value="#{userProduct.product.location}"/>
-
-                    <p:outputLabel value="Status: "/>
-                    <p:outputLabel value="#{userProduct.status}"/>
-
-                    <p:outputLabel value="Date and Time: " rendered="#{userProduct.dateAndTime != null}"/>
-                    <p:outputLabel value="#{userProduct.dateAndTime}" rendered="#{userProduct.dateAndTime != null}"/>
-
-                    <p:outputLabel value="Notes: " rendered="#{userProduct.notes != null}"/>
-                    <p:outputLabel value="#{userProduct.notes}" rendered="#{userProduct.notes != null}"/>
+                    <p:outputLabel value=" in the paypal payment page." style="color: brown; font-weight: bold; font-size: 25px"/>
                     <br></br>
-                </h:panelGrid>
-            </ui:repeat>
-            <p:outputLabel value="Please enter the total amount of " style="color: brown; font-weight: bold; font-size: 25px"/>
-            <p:outputLabel value="#{userBean.totalAmount}" style="color: brown; font-weight: bold; font-size: 25px">
-                <f:convertNumber type="currency" />
-            </p:outputLabel>
-            <p:outputLabel value=" in the paypal payment page." style="color: brown; font-weight: bold; font-size: 25px"/>
-            <br></br>
-            <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" style="font-size: 12px;">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                    <input type="hidden" name="cmd" value="_s-xclick"/>
-                    <input type="hidden" name="hosted_button_id" value="7CGB5PFGR9ZKW"/>
-                    <input type="hidden" name="item_name" value="Services Purchased From Sri Venkateswara Swamy Temple of Colorado"/>
-                    <input type="hidden" name="item_price" value="#{userBean.totalAmount}"/>
-                    <input type="hidden" name="quantity" value="1"/>
-                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
-                </form>
-            </p:panelGrid>
-        </p:panel>
-    </div>
+                    <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" style="font-size: 12px;">
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick"/>
+                            <input type="hidden" name="hosted_button_id" value="7CGB5PFGR9ZKW"/>
+                            <input type="hidden" name="item_name" value="Services Purchased From Sri Venkateswara Swamy Temple of Colorado"/>
+                            <input type="hidden" name="item_price" value="#{userBean.totalAmount}"/>
+                            <input type="hidden" name="quantity" value="1"/>
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                        </form>
+                    </p:panelGrid>
+                </p:panel>
+            </div>
+        </p:layoutUnit>
+    </p:layout>
 </h:body>
 </html>

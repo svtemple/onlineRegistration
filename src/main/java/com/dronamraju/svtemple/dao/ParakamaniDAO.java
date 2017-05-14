@@ -6,10 +6,8 @@ import com.dronamraju.svtemple.util.EntityManagerUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
+import javax.persistence.*;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,37 +17,42 @@ import java.util.List;
 public class ParakamaniDAO {
 
     private static Log log = LogFactory.getLog(ParakamaniDAO.class);
-    EntityManager parakamaniEntityManager = EntityManagerUtil.getParakamaniEntityManager();
+    private static EntityManagerFactory parakamaniEntityManagerFactory;
+    private static EntityManager parakamaniEntityManager;
 
     public Donor findDonor(Long donorId){
-        EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         try {
             log.info("findDonor..");
             return parakamaniEntityManager.find(Donor.class, donorId);
         } catch (Exception e) {
-            if (entityTransaction.isActive()) {
-                entityTransaction.rollback();
-            }
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
 
     public List getDonors() {
-        EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         try {
             Query query = parakamaniEntityManager.createQuery("SELECT donor FROM Donor donor", Donor.class);
             List<Donor> donors = query.getResultList();
             log.info("ParakamaniDAO - Donors: " + donors);
             return donors;
         } catch (Exception e) {
-            if (entityTransaction.isActive()) {
-                entityTransaction.rollback();
-            }
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
 
     public void save(Donor donor) {
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
         try {
             log.info("Saving donor: " + donor);
@@ -59,10 +62,15 @@ public class ParakamaniDAO {
         } catch (Exception e) {
             entityTransaction.rollback();
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
 
     public void updateDonor(Donor selectedDonor) {
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
         try {
             parakamaniEntityManager.getTransaction().begin();
@@ -73,10 +81,15 @@ public class ParakamaniDAO {
                 entityTransaction.rollback();
             }
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
 
     public void removeDonor(Donor selectedDonor) {
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
         try {
             parakamaniEntityManager.getTransaction().begin();
@@ -87,10 +100,15 @@ public class ParakamaniDAO {
                 entityTransaction.rollback();
             }
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
 
     public Donor find(Long id) {
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = parakamaniEntityManager.getTransaction();
         try {
             return parakamaniEntityManager.find(Donor.class, id);
@@ -99,8 +117,10 @@ public class ParakamaniDAO {
                 entityTransaction.rollback();
             }
             throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
         }
     }
-
 
 }

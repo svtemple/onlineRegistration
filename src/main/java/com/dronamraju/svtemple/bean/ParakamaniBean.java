@@ -17,6 +17,8 @@ import com.dronamraju.svtemple.util.SendEmail;
 import com.dronamraju.svtemple.util.Util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -27,7 +29,7 @@ import com.dronamraju.svtemple.service.ParakamaniService;
  */
 
 @ManagedBean(name = "parakamaniBean")
-@RequestScoped
+@SessionScoped
 public class ParakamaniBean implements Serializable {
 
     private static Log log = LogFactory.getLog(ParakamaniBean.class);

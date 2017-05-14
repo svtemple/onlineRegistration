@@ -30,7 +30,7 @@ public class AuthorizationFilter implements Filter {
                 || request.getServletPath().contains("userRegistration.xhtml")
                 || request.getServletPath().contains("javax.faces.resource")
                 || request.getServletPath().contains("images")
-                || request.getServletPath().contains("/parakamani/")
+                //|| request.getServletPath().contains("/parakamani/")
                 //|| request.getServletPath().contains("product.xhtml")
         )) {
             response.sendRedirect("login.xhtml");

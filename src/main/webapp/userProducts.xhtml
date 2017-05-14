@@ -8,77 +8,85 @@
     <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
 </h:head>
 <h:body style="font-size: 12px;">
-    <ui:include src="menu.xhtml"/>
-    <br></br>
-    <h:form>
-    <p:panel header="User Services" style="font-size: 12px;">
 
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100" minSize="40" maxSize="200">
+            <center><h1 style="color: #800000">SRI VENKATESWARA SWAMY TEMPLE OF COLORADO</h1></center>
+        </p:layoutUnit>
 
-        <p:dataTable id="userProducts"
-                     var="userProduct"
-                     style="font-size: 12px;"
-                     value="#{userBean.userProducts}"
-                     reflow="true"
-                     rows="25"
-                     paginator="true"
-                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                     filteredValue="#{productBean.filteredProducts}"
-                     rowsPerPageTemplate="25,100,500">
+        <p:layoutUnit position="west">
+            <ui:include src="menu.xhtml"/>
+        </p:layoutUnit>
 
-            <f:facet name="{Exporters}">
-                <h:commandLink>
-                    <p:graphicImage name="/demo/images/excel.png" width="24"/>
-                    <p:dataExporter type="xls" target="tbl" fileName="userProducts" />
-                </h:commandLink>
+        <p:layoutUnit position="center">
+            <h:form>
+                <p:panel header="User Services" style="font-size: 12px;">
+                    <p:dataTable id="userProducts"
+                                 var="userProduct"
+                                 style="font-size: 12px;"
+                                 value="#{userBean.userProducts}"
+                                 reflow="true"
+                                 rows="25"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 filteredValue="#{productBean.filteredProducts}"
+                                 rowsPerPageTemplate="25,100,500">
 
-                <h:commandLink>
-                    <p:graphicImage name="/demo/images/pdf.png" width="24"/>
-                    <p:dataExporter type="pdf" target="tbl" fileName="userProducts"/>
-                </h:commandLink>
+                        <f:facet name="{Exporters}">
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+                                <p:dataExporter type="xls" target="tbl" fileName="userProducts" />
+                            </h:commandLink>
 
-                <h:commandLink>
-                    <p:graphicImage name="/demo/images/csv.png" width="24"/>
-                    <p:dataExporter type="csv" target="tbl" fileName="userProducts" />
-                </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                                <p:dataExporter type="pdf" target="tbl" fileName="userProducts"/>
+                            </h:commandLink>
 
-                <h:commandLink>
-                    <p:graphicImage name="/demo/images/xml.png" width="24"/>
-                    <p:dataExporter type="xml" target="tbl" fileName="userProducts" />
-                </h:commandLink>
-            </f:facet>
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                                <p:dataExporter type="csv" target="tbl" fileName="userProducts" />
+                            </h:commandLink>
 
-            <p:column headerText="Name" filterBy="#{userProduct.product.name}" filterMatchMode="contains" sortBy="#{userProduct.product.name}">
-                <h:outputText value="#{userProduct.product.name}" />
-            </p:column>
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                                <p:dataExporter type="xml" target="tbl" fileName="userProducts" />
+                            </h:commandLink>
+                        </f:facet>
 
-            <p:column headerText="Location" filterBy="#{userProduct.product.location}" filterMatchMode="contains" sortBy="#{userProduct.product.location}">
-                <h:outputText value="#{userProduct.product.location}" />
-            </p:column>
+                        <p:column headerText="Name" filterBy="#{userProduct.product.name}" filterMatchMode="contains" sortBy="#{userProduct.product.name}">
+                            <h:outputText value="#{userProduct.product.name}" />
+                        </p:column>
 
-            <p:column headerText="Schedule" filterBy="#{userProduct.product.schedule}" filterMatchMode="contains" sortBy="#{userProduct.product.schedule}">
-                <h:outputText value="#{userProduct.product.schedule}" />
-            </p:column>
+                        <p:column headerText="Location" filterBy="#{userProduct.product.location}" filterMatchMode="contains" sortBy="#{userProduct.product.location}">
+                            <h:outputText value="#{userProduct.product.location}" />
+                        </p:column>
 
-            <p:column headerText="Price" filterBy="#{userProduct.product.price}" filterMatchMode="contains" sortBy="#{userProduct.product.price}">
-                <h:outputText value="#{userProduct.product.price}" >
-                    <f:convertNumber currencySymbol="$" type="currency"/>
-                </h:outputText>
-            </p:column>
+                        <p:column headerText="Schedule" filterBy="#{userProduct.product.schedule}" filterMatchMode="contains" sortBy="#{userProduct.product.schedule}">
+                            <h:outputText value="#{userProduct.product.schedule}" />
+                        </p:column>
 
-            <p:column headerText="Status" filterBy="#{userProduct.status}" filterMatchMode="contains" sortBy="#{userProduct.status}">
-                <h:outputText value="#{userProduct.status}" />
-            </p:column>
+                        <p:column headerText="Price" filterBy="#{userProduct.product.price}" filterMatchMode="contains" sortBy="#{userProduct.product.price}">
+                            <h:outputText value="#{userProduct.product.price}" >
+                                <f:convertNumber currencySymbol="$" type="currency"/>
+                            </h:outputText>
+                        </p:column>
 
-            <p:column headerText="Notes" filterBy="#{userProduct.notes}" filterMatchMode="contains" sortBy="#{userProduct.notes}">
-                <h:outputText value="#{userProduct.notes}" />
-            </p:column>
+                        <p:column headerText="Status" filterBy="#{userProduct.status}" filterMatchMode="contains" sortBy="#{userProduct.status}">
+                            <h:outputText value="#{userProduct.status}" />
+                        </p:column>
 
-            <p:column headerText="Date and Time" filterBy="#{userProduct.dateAndTime}" filterMatchMode="contains" sortBy="#{userProduct.dateAndTime}">
-                <h:outputText value="#{userProduct.dateAndTime}" />
-            </p:column>
-        </p:dataTable>
+                        <p:column headerText="Notes" filterBy="#{userProduct.notes}" filterMatchMode="contains" sortBy="#{userProduct.notes}">
+                            <h:outputText value="#{userProduct.notes}" />
+                        </p:column>
 
-    </p:panel>
-    </h:form>
+                        <p:column headerText="Date and Time" filterBy="#{userProduct.dateAndTime}" filterMatchMode="contains" sortBy="#{userProduct.dateAndTime}">
+                            <h:outputText value="#{userProduct.dateAndTime}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
 </h:body>
 </html>
