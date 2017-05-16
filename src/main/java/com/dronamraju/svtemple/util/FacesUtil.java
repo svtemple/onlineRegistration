@@ -1,5 +1,6 @@
 package com.dronamraju.svtemple.util;
 
+import com.dronamraju.svtemple.model.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -49,4 +50,11 @@ public class FacesUtil {
         return null;
     }
 
+    public static void setUserInSession(User loggedInUser) {
+        FacesUtil.getRequest().getSession().setAttribute("loggedInUser", loggedInUser);
+    }
+
+    public static User getUserFromSession() {
+        return (User)FacesUtil.getRequest().getSession().getAttribute("loggedInUser");
+    }
 }

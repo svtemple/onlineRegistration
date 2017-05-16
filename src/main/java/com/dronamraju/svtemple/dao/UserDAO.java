@@ -111,7 +111,7 @@ public class UserDAO {
 				return null;
 			}
 			User user = users.get(0);
-			log.info("findUser - user: " + user.getFirstName() + ", " + user.getLastName() + ", " + user.getEmail());
+			log.info("findUser - user: " + user.getFirstName() + ", " + user.getLastName() + ", " + user.getEmail() + ", " + user.getIsAdmin());
 
 			return user;
 		} catch (Exception e) {
@@ -222,6 +222,19 @@ public class UserDAO {
 				return values.get(0);
 			}
 			return null;
+		} catch (Exception e) {
+			if (entityTransaction.isActive()) {
+				entityTransaction.rollback();
+			}
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void detachUser(User loggedInUser) {
+		EntityTransaction entityTransaction = posEntityManager.getTransaction();
+		try {
+			log.info("detachUser...");
+			posEntityManager.detach(loggedInUser);
 		} catch (Exception e) {
 			if (entityTransaction.isActive()) {
 				entityTransaction.rollback();

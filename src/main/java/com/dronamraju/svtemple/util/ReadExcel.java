@@ -60,7 +60,7 @@ public class ReadExcel {
                                 currentRow.getCell(38) == null ? "" : currentRow.getCell(38).toString(),
                                 currentRow.getCell(39) == null ? "" : currentRow.getCell(39).toString(),
                                 currentRow.getCell(39) == null ? "" : currentRow.getCell(39).toString(),
-                                "N",
+                                false,
                                 new Date(),
                                 new Date(),
                                 "System",
@@ -100,7 +100,7 @@ public class ReadExcel {
                         preparedStmt.setString(25, user.getChild4Name());
                         preparedStmt.setString(26, user.getChild4Nakshathram());
                         preparedStmt.setString(27, user.getChild4Padam());
-                        preparedStmt.setString(28, "N");
+                        preparedStmt.setBoolean(28, false);
                         preparedStmt.setDate(29, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
                         preparedStmt.setDate(30, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
                         preparedStmt.setString(31, "System");

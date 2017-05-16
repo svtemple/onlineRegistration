@@ -18,7 +18,7 @@ import com.dronamraju.svtemple.util.Util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -29,7 +29,7 @@ import com.dronamraju.svtemple.service.ProductService;
  */
 
 @ManagedBean(name = "productBean")
-@SessionScoped
+@RequestScoped
 public class ProductBean implements Serializable {
 
     private static Log log = LogFactory.getLog(ProductBean.class);
@@ -93,7 +93,7 @@ public class ProductBean implements Serializable {
 
     public void addProduct() {
         log.info("addProduct()...");
-        User loggedInUser = (User)FacesUtil.getRequest().getSession().getAttribute("loggedInUser");
+        User loggedInUser = FacesUtil.getUserFromSession();
         Boolean hasValidationErrors = false;
 
         if (product.getName() == null || product.getName().trim().length() < 1) {
@@ -140,10 +140,10 @@ public class ProductBean implements Serializable {
 
     public void updateProduct() {
         log.info("selectedProduct: " + selectedProduct);
-        if (FacesUtil.getRequest().getSession().getAttribute("loggedInUser") == null) {
+        if (FacesUtil.getUserFromSession() == null) {
             FacesUtil.redirect("login.xhtml");
         }
-        User loggedInUser = (User)FacesUtil.getRequest().getSession().getAttribute("loggedInUser");
+        User loggedInUser = FacesUtil.getUserFromSession();
         selectedProduct.setCreatedDate(Calendar.getInstance().getTime());
         selectedProduct.setUpdatedDate(Calendar.getInstance().getTime());
         selectedProduct.setCreatedUser(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
@@ -155,7 +155,7 @@ public class ProductBean implements Serializable {
     }
 
     public String deleteProduct() {
-        if (FacesUtil.getRequest().getSession().getAttribute("loggedInUser") == null) {
+        if (FacesUtil.getUserFromSession() == null) {
             FacesUtil.redirect("login.xhtml");
         }
         productService.removeProduct(selectedProduct);

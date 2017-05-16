@@ -2,7 +2,6 @@ package com.dronamraju.svtemple.model;
 
 import java.util.*;
 
-import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -43,7 +42,7 @@ public class User implements java.io.Serializable {
 	private String child4Name;
 	private String child4Nakshathram;
 	private String child4Padam;
-	private String isAdmin;
+	private Boolean isAdmin;
 	private Date updatedDate;
 	private Date createdDate;
 	private String updatedUser;
@@ -53,7 +52,7 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email, String phoneNumber, String streetAddress, String city, String state, String zip, String password, String familyGothram, String primaryNakshathram, String spouseName, String spouseNakshathram, String child1Name, String child1Nakshathram, String child2Name, String child2Nakshathram, String child3Name, String child3Nakshathram, String child4Name, String child4Nakshathram, String isAdmin, Date updatedDate, Date createdDate, String updatedUser, String createdUser) {
+	public User(String firstName, String lastName, String email, String phoneNumber, String streetAddress, String city, String state, String zip, String password, String familyGothram, String primaryNakshathram, String spouseName, String spouseNakshathram, String child1Name, String child1Nakshathram, String child2Name, String child2Nakshathram, String child3Name, String child3Nakshathram, String child4Name, String child4Nakshathram, Boolean isAdmin, Date updatedDate, Date createdDate, String updatedUser, String createdUser) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -346,11 +345,11 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name="is_admin")
-	public String getIsAdmin() {
+	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setIsAdmin(String isAdmin) {
+	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

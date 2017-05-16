@@ -21,7 +21,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 
 
 @ManagedBean(name = "userBean")
-@SessionScoped
+@ViewScoped
 public class UserBean implements Serializable {
 
 	private static Log log = LogFactory.getLog(UserBean.class);
@@ -70,6 +70,7 @@ public class UserBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		user = new User();
+		loggedInUser = FacesUtil.getUserFromSession();
 	}
 
 	public UserService getUserService() {
@@ -102,7 +103,7 @@ public class UserBean implements Serializable {
 			}
 
 			loggedInUser = userService.findUser(user.getEmail(), AES.encrypt(user.getPassword()));
-			FacesUtil.getRequest().getSession().setAttribute("loggedInUser", loggedInUser);
+			FacesUtil.setUserInSession(loggedInUser);
 //			log.info("loggedInUser: " + loggedInUser);
 			if (loggedInUser == null) {
 				FacesUtil.getFacesContext().addMessage("password", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Either invalid login or user does not exist.", null));
@@ -122,8 +123,8 @@ public class UserBean implements Serializable {
 		try {
 			Boolean hasValidationErrors = false;
 //			log.info("User: " + user);
-			if ( FacesUtil.getRequest().getSession().getAttribute("loggedInUser") != null) {
-				loggedInUser = (User) FacesUtil.getRequest().getSession().getAttribute("loggedInUser");
+			if (FacesUtil.getUserFromSession() != null) {
+				loggedInUser = FacesUtil.getUserFromSession();
 			}
 
 			if (user.getFirstName() == null || user.getFirstName().trim().length() < 1) {
@@ -189,9 +190,10 @@ public class UserBean implements Serializable {
 			user.setUpdatedDate(Calendar.getInstance().getTime());
 			user.setCreatedUser(user.getFirstName() + " " + user.getLastName());
 			user.setUpdatedUser(user.getFirstName() + " " + user.getLastName());
-			user.setIsAdmin("N");
+			user.setIsAdmin(false);
 			user.setPassword(AES.encrypt(user.getPassword()));
 			loggedInUser = userService.saveUser(user);
+			FacesUtil.setUserInSession(loggedInUser);
 			StringBuilder sb = new StringBuilder();
 			sb.append("<b>Hello " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + ",<br><br>Thank you for registering or updating your profile.</b><br></br>");
 			sb.append("<b>Sri Venkateswara Swamy Temple Of Colorado</b><br>");
@@ -202,8 +204,6 @@ public class UserBean implements Serializable {
 			sb.append("<b>PayPal Donor: <a href='https://www.paypal.me/svtempleco'>SVTC PayPal Link</a></b><br>");
 			String recipients = "manudr@hotmail.com";
 			SendEmail.sendMail(sb.toString(), loggedInUser.getEmail(), recipients);
-			FacesUtil.getRequest().getSession().setAttribute("loggedInUser", loggedInUser);
-			//log.info("loggedInUser: " + loggedInUser);
 			FacesUtil.redirect("login.xhtml");
 		} catch(Exception exception) {
 			Optional<Throwable> rootCause = Stream.iterate(exception, Throwable::getCause).filter(element -> element.getCause() == null).findFirst();
@@ -220,8 +220,8 @@ public class UserBean implements Serializable {
 			//log.info("User: " + user);
 			totalAmount = 0.00;
 
-			if ( FacesUtil.getRequest().getSession().getAttribute("loggedInUser") != null) {
-				loggedInUser = (User) FacesUtil.getRequest().getSession().getAttribute("loggedInUser");
+			if (FacesUtil.getUserFromSession() != null) {
+				loggedInUser = FacesUtil.getUserFromSession();
 			}
 
 			//log.info("loggedInUser in session: " + loggedInUser);
@@ -313,7 +313,7 @@ public class UserBean implements Serializable {
 			String recipients = "manudr@hotmail.com";
 			SendEmail.sendMail(sb.toString(), user.getEmail(), recipients);
 			loggedInUser = user;
-			FacesUtil.getRequest().getSession().setAttribute("loggedInUser", loggedInUser);
+			FacesUtil.setUserInSession(loggedInUser);
 //			log.info("loggedInUser: " + loggedInUser);
 			FacesUtil.redirect("payment.xhtml");
 		} catch(Exception exception) {
@@ -326,16 +326,12 @@ public class UserBean implements Serializable {
 
 	public void cancel() {
 		log.info("cancel()..");
-		if (loggedInUser != null) {
-			FacesUtil.getRequest().getSession().removeAttribute("loggedInUser");
-			FacesUtil.getRequest().getSession().invalidate();
-		}
-		FacesUtil.redirect("login.xhtml");
+		FacesUtil.redirect("purchaseServices.xhtml");
 	}
 
 	public void goToAllServicesPage() {
 		log.info("goToAllServicesPage()..");
-		if (loggedInUser != null && loggedInUser.getIsAdmin().equals("Y")) {
+		if (loggedInUser != null && loggedInUser.getIsAdmin()) {
 			products = productService.getProducts();
 			FacesUtil.redirect("products.xhtml");
 		} else {
@@ -345,7 +341,7 @@ public class UserBean implements Serializable {
 
 	public void goToAllUsersPage() {
 		log.info("goToAllUsersPage()..");
-		if (loggedInUser != null && loggedInUser.getIsAdmin().equals("Y")) {
+		if (loggedInUser != null && loggedInUser.getIsAdmin()) {
 			users = userService.findAllUsers();
 			FacesUtil.redirect("users.xhtml");
 		} else {
@@ -367,17 +363,7 @@ public class UserBean implements Serializable {
 		log.info("goToAllDevoteeServicesPage()..");
 		if (loggedInUser != null) {
 			userProducts = userService.findUserProducts();
-			FacesUtil.redirect("allDevoteesAndServices.xhtml");
-		} else {
-			FacesUtil.redirect("login.xhtml");
-		}
-	}
-
-	public void goToAllDonorsPage() {
-		log.info("goToAllDonorsPage()..");
-		if (loggedInUser != null) {
-			userProducts = userService.findUserProducts();
-			FacesUtil.redirect("allDonors.xhtml");
+			FacesUtil.redirect("devoteesAndServices.xhtml");
 		} else {
 			FacesUtil.redirect("login.xhtml");
 		}
@@ -385,7 +371,7 @@ public class UserBean implements Serializable {
 
 	public void goToAddNewServicePage() {
 		log.info("goToAddNewServicePage()..");
-		if (loggedInUser != null && loggedInUser.getIsAdmin().equals("Y")) {
+		if (loggedInUser != null && loggedInUser.getIsAdmin()) {
 			FacesUtil.redirect("product.xhtml");
 		} else {
 			FacesUtil.redirect("login.xhtml");
@@ -439,6 +425,8 @@ public class UserBean implements Serializable {
 
 	public void logout() {
 		try {
+			userService.detachUser(loggedInUser);
+			FacesUtil.setUserInSession(null);
 			FacesUtil.getRequest().getSession().removeAttribute("loggedInUser");
 			FacesUtil.getRequest().getSession().invalidate();
 			FacesUtil.redirect("login.xhtml");

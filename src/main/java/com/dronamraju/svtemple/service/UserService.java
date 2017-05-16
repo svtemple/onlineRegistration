@@ -67,4 +67,8 @@ public class UserService {
     public void updateUserPassword(String email, String newPassword) {
         userDAO.updateUserPassword(email, newPassword);
     }
+
+    public void detachUser(User loggedInUser) {
+        userDAO.detachUser(loggedInUser);
+    }
 }
