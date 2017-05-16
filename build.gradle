@@ -4,7 +4,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'war'
 archivesBaseName = 'onlineRegistration'
-version = '1' 
 
 repositories {
     mavenLocal()

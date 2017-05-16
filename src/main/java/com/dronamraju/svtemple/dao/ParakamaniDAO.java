@@ -2,6 +2,7 @@ package com.dronamraju.svtemple.dao;
 
 
 import com.dronamraju.svtemple.model.Donor;
+import com.dronamraju.svtemple.model.Event;
 import com.dronamraju.svtemple.util.EntityManagerUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,7 +35,7 @@ public class ParakamaniDAO {
         }
     }
 
-    public List getDonors() {
+    public List<Donor> getDonors() {
         parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
         parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
         try {
@@ -42,6 +43,22 @@ public class ParakamaniDAO {
             List<Donor> donors = query.getResultList();
 //            log.info("ParakamaniDAO - Donors: " + donors);
             return donors;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            parakamaniEntityManager.close();
+            parakamaniEntityManagerFactory.close();
+        }
+    }
+
+    public List<Event> getEvents() {
+        parakamaniEntityManagerFactory = Persistence.createEntityManagerFactory("parakamani-jpa");
+        parakamaniEntityManager = parakamaniEntityManagerFactory.createEntityManager();
+        try {
+            Query query = parakamaniEntityManager.createQuery("SELECT event FROM Event event", Event.class);
+            List<Event> events = query.getResultList();
+            log.info("ParakamaniDAO - events: " + events);
+            return events;
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

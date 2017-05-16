@@ -8,7 +8,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "SVTC_PARAKAMANI_EVENT", schema = "svt07302009")
+@Table(name = "SVTC_PARAKAMANI_EVENT", schema = "parakamani")
 public class Event implements java.io.Serializable {
 
 	private Long eventId;
@@ -22,11 +22,11 @@ public class Event implements java.io.Serializable {
 	private Integer deductFromEvent;
 	private String incomeCategory;
 	private String incomeSubCategory;
+	private List<Service> services;
 
 	public Event() {
 
 	}
-
 
 	@Id
 	@Column(name = "EVENT_ID", unique = true, nullable = false)
@@ -128,6 +128,15 @@ public class Event implements java.io.Serializable {
 		this.incomeSubCategory = incomeSubCategory;
 	}
 
+	@Transient
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
 	@Override
 	public String toString() {
 		return "Event{" +
@@ -142,6 +151,7 @@ public class Event implements java.io.Serializable {
 				", deductFromEvent=" + deductFromEvent +
 				", incomeCategory='" + incomeCategory + '\'' +
 				", incomeSubCategory='" + incomeSubCategory + '\'' +
+				", services=" + services +
 				'}';
 	}
 }

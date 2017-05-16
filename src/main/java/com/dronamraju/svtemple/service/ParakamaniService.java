@@ -6,6 +6,7 @@ import javax.faces.bean.RequestScoped;
 
 import com.dronamraju.svtemple.dao.ParakamaniDAO;
 import com.dronamraju.svtemple.model.Donor;
+import com.dronamraju.svtemple.model.Event;
 
 
 import java.util.*;
@@ -17,32 +18,36 @@ import java.util.*;
 @ManagedBean(name = "parakamaniService")
 @ApplicationScoped
 public class ParakamaniService {
-    ParakamaniDAO donorDAO = new ParakamaniDAO();
+    ParakamaniDAO parakamaniDAO = new ParakamaniDAO();
 
     public Donor findDonor(Long donorId){
-        return donorDAO.findDonor(donorId);
+        return parakamaniDAO.findDonor(donorId);
     }
 
     public List<Donor> getDonors() {
-        List<Donor> list = donorDAO.getDonors();
+        List<Donor> list = parakamaniDAO.getDonors();
         return list;
     }
 
     public void saveDonor(Donor donor) {
-        donorDAO.save(donor);
+        parakamaniDAO.save(donor);
     }
 
     public void updateDonor(Donor selectedDonor) {
-        donorDAO.updateDonor(selectedDonor);
+        parakamaniDAO.updateDonor(selectedDonor);
     }
 
     public void removeDonor(Donor selectedDonor) {
-        donorDAO.removeDonor(selectedDonor);
+        parakamaniDAO.removeDonor(selectedDonor);
     }
 
     public Donor find(Long id) {
-        return donorDAO.find(id);
+        return parakamaniDAO.find(id);
     }
 
+    public List<Event> getEvents() {
+        List<Event> events = parakamaniDAO.getEvents();
+        return events;
+    }
 
 }

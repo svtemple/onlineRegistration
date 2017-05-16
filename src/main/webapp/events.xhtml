@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sri Venkateswara Swamy Temple Of Colorado-Temple Services</title>
+</h:head>
+
+<h:body style="font-size: 12px;">
+    <br></br>
+    <p:layout fullPage="true">
+    <p:layoutUnit position="north" size="100" minSize="40" maxSize="200">
+        <center><h1 style="color: #800000">SRI VENKATESWARA SWAMY TEMPLE OF COLORADO</h1></center>
+    </p:layoutUnit>
+
+    <p:layoutUnit position="west">
+        <ui:include src="menu.xhtml"/>
+    </p:layoutUnit>
+
+    <p:layoutUnit position="center">
+        <h:form style="font-size: 12px;">
+            <div class="ui-fluid">
+                <p:panel header="All Events and Services">
+                    <center>
+                    <h:commandLink>
+                        <b style="font-size: 18px;">Export To Excel</b>
+                        <p:dataExporter type="xls" target="events" fileName="cars" pageOnly="true"/>
+                    </h:commandLink>
+                    &nbsp;&nbsp;&nbsp;
+                    <h:commandLink>
+                        <b style="font-size: 18px;">Export To PDF</b>
+                        <p:dataExporter type="pdf" target="events" fileName="cars" pageOnly="true" />
+                    </h:commandLink>
+                    </center>
+                    <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:dataTable id="events"
+                                     var="event"
+                                     style="margin-bottom:0; font-size: 12px;"
+                                     value="#{parakamaniBean.events}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     filteredValue="#{parakamaniBean.filteredEvents}"
+                                     rowsPerPageTemplate="25,100,500">
+
+                            <p:column headerText="Event Id" filterBy="#{event.eventId}" filterMatchMode="contains" sortBy="#{event.eventId}">
+                                <h:outputText value="#{event.eventId}" />
+                            </p:column>
+
+                            <p:column headerText="Description" filterBy="#{event.eventDescription}" filterMatchMode="contains" sortBy="#{event.eventDescription}">
+                                <h:outputText value="#{event.eventDescription}" />
+                            </p:column>
+
+                            <p:column headerText="Date" filterBy="#{event.eventDate}" filterMatchMode="contains" sortBy="#{event.eventDate}">
+                                <h:outputText value="#{event.eventDate}">
+                                    <f:convertDateTime pattern="MM/dd/YYYY" type="date" timeZone="US/Mountain"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Venue" filterBy="#{event.venue}" filterMatchMode="contains" sortBy="#{event.venue}">
+                                <h:outputText value="#{event.venue}"/>
+                            </p:column>
+
+                            <p:column headerText="Deduct From Event" filterBy="#{event.deductFromEvent}" filterMatchMode="contains" sortBy="#{event.deductFromEvent}">
+                                <h:outputText value="#{event.deductFromEvent}" />
+                            </p:column>
+
+                            <p:column headerText="Income Category" filterBy="#{event.incomeCategory}" filterMatchMode="contains" sortBy="#{event.incomeCategory}">
+                                <h:outputText value="#{event.incomeCategory}" />
+                            </p:column>
+
+                            <p:column headerText="Income Sub Category" filterBy="#{event.incomeSubCategory}" filterMatchMode="contains" sortBy="#{event.incomeSubCategory}">
+                                <h:outputText value="#{event.incomeSubCategory}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panelGrid>
+                </p:panel>
+            </div>
+        </h:form>
+    </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>
